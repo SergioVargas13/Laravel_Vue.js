@@ -2,7 +2,7 @@
     <div class="container container-task">
         <div class="row">
             <div class="col-md-6">
-                <h2>Prueba en Vue.js Con laravel</h2>
+                <h2>Prueba en Vue.Js Con laravel</h2>
                 <table class="table text-center">
                         <thead>
                             <tr>
