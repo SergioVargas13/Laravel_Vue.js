@@ -2,7 +2,7 @@
     <div class="container container-task">
         <div class="row">
             <div class="col-md-6">
-                <h2>Prueba con Laravel Utilizando Vue.js</h2>
+                <h2>Prueba con Laravel Utilizando Vue.Js</h2>
                 <table class="table text-center">
                         <thead>
                             <tr>
@@ -37,7 +37,7 @@
                 <div class="container-buttons">
                     <button v-if="update == 0" @click="savePrueba()" class="btn btn-success">Agregar</button>
                     <button v-if="update != 0" @click="updatePrueba()" class="btn btn-warning">Actualizar</button>
-                    <button v-if="update != 0" @click="clear()" class="btn">Atrás</button>
+                    <button v-if="update != 0" @click="clear()" class="btn btn-secundary">Atrás</button>
                 </div>
             </div>
         </div>
