@@ -37,7 +37,7 @@
                 <div class="container-buttons">
                     <button v-if="update == 0" @click="savePrueba()" class="btn btn-success">Agregar</button>
                     <button v-if="update != 0" @click="updatePrueba()" class="btn btn-warning">Actualizar</button>
-                    <button v-if="update != 0" @click="clear()" class="btn btn-secundary">Atrás</button>
+                    <button v-if="update != 0" @click="clear()" class="btn">Atrás</button>
                 </div>
             </div>
         </div>
