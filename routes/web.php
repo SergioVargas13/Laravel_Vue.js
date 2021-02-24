@@ -27,3 +27,14 @@ Route::post('/prueba/guardar', 'PruebaController@store');
 Route::delete('/prueba/borrar/{id}', 'PruebaController@destroy');
 
 Route::get('/prueba/buscar', 'PruebaController@show');
+
+//Persona
+Route::get('/persona', 'PersonaController@index');
+
+Route::put('/persona/actualizar', 'PersonaController@update');
+
+Route::post('/persona/guardar', 'PersonaController@store');
+
+Route::delete('/persona/borrar/{id}', 'PersonaController@destroy');
+
+Route::get('/persona/buscar', 'PersonaController@show');
