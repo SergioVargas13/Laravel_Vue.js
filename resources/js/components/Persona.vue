@@ -126,7 +126,7 @@
             deleteDatos(data){
                 let me =this;
                 let task_id = data.id
-                if (confirm('¿Seguro que deseas borrar esta Prueba?')) {
+                if (confirm('¿Seguro que deseas eliminar esta Persona?')) {
                     axios.delete('/persona/borrar/'+task_id
                     ).then(function (response) {
                         me.getPrueba();

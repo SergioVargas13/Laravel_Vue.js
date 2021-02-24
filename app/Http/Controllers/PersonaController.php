@@ -42,7 +42,7 @@ class PersonaController extends Controller
         $persona->nombre=$request->nombre;
         $persona->apellido=$request->apellido;
         $persona->edad=$request->edad;
-        $persona->genero=$request->save;
+        $persona->genero=$request->genero;
         $persona->save();
         
     }
@@ -85,7 +85,7 @@ class PersonaController extends Controller
         $persona->nombre=$request->nombre;
         $persona->apellido=$request->apellido;
         $persona->edad=$request->edad;
-        $persona->genero=$request->save;
+        $persona->genero=$request->genero;
         $persona->save();
     }
 
