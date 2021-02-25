@@ -12,8 +12,6 @@
     <body>
             <div id="app" class="content">
             <example-component></example-component>
-            <br>
-            <persona-component><persona-component>
             </div>
         <script src="{{asset('js/app.js')}}"></script> 
     </body>
