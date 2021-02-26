@@ -2102,92 +2102,112 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      documento: "",
       nombre: "",
       apellido: "",
       edad: "",
+      telefono: "",
       genero: "",
       update: 0,
-      arrayDatos: []
+      arrayPersona: []
     };
   },
   methods: {
-    getDatos: function getDatos() {
-      var me = this;
+    getPersona: function getPersona() {
+      var persona = this;
       var url = '/persona';
       axios.get(url).then(function (response) {
-        me.arrayDatos = response.data;
+        persona.arrayPersona = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    saveDatos: function saveDatos() {
-      var me = this;
+    savePersona: function savePersona() {
+      var persona = this;
       var url = '/persona/guardar';
       axios.post(url, {
+        'documento': this.documento,
         'nombre': this.nombre,
         'apellido': this.apellido,
         'edad': this.edad,
+        'telefono': this.telefono,
         'genero': this.genero
       }).then(function (response) {
-        me.getDatos();
-        me.clear();
+        persona.getPersona();
+        persona.clear();
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    updateDatos: function updateDatos() {
-      var me = this;
+    updatePersona: function updatePersona() {
+      var persona = this;
       axios.put('/persona/actualizar', {
         'id': this.update,
+        'documento': this.documento,
         'nombre': this.nombre,
         'apellido': this.apellido,
         'edad': this.edad,
+        'telefono': this.telefono,
         'genero': this.genero
       }).then(function (response) {
-        me.getDatos();
-        me.clear();
+        persona.getPersona();
+        persona.clear();
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    UpdateDatos: function UpdateDatos(data) {
+    UpdatePersona: function UpdatePersona(data) {
       this.update = data.id;
-      var me = this;
+      var persona = this;
       var url = '/persona/buscar?id=' + this.update;
       axios.get(url).then(function (response) {
-        me.nombre = response.data.nombre;
-        me.apellido = response.data.apellido;
-        me.edad = response.data.edad;
-        me.genero = response.data.genero;
+        persona.documento = response.data.documento;
+        persona.nombre = response.data.nombre;
+        persona.apellido = response.data.apellido;
+        persona.edad = response.data.edad;
+        persona.telefono = response.data.telefono;
+        persona.genero = response.data.genero;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    deleteDatos: function deleteDatos(data) {
-      var me = this;
-      var task_id = data.id;
+    deletePersona: function deletePersona(data) {
+      var persona = this;
+      var persona_id = data.id;
 
-      if (confirm('¿Seguro que deseas borrar esta Prueba?')) {
-        axios["delete"]('/persona/borrar/' + task_id).then(function (response) {
-          me.getPrueba();
+      if (confirm('¿Seguro que deseas eliminar esta Persona?')) {
+        axios["delete"]('/persona/borrar/' + persona_id).then(function (response) {
+          persona.getPersona();
         })["catch"](function (error) {
           console.log(error);
         });
       }
     },
     clear: function clear() {
+      this.documento = "";
       this.nombre = "";
       this.apellido = "";
       this.edad = "";
+      this.telefono = "";
       this.genero = "";
-      this.update = 0;
     }
   },
   mounted: function mounted() {
-    this.getDatos();
+    this.getPersona();
   }
 });
 
@@ -38019,62 +38039,104 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container container-task" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("h2", [_vm._v("Datos de Personas")]),
+      _c("div", { staticClass: "col-md-6 col-xs-12" }, [
+        _c("h2", [_vm._v("Listas de Datos de Personas")]),
         _vm._v(" "),
-        _c("table", { staticClass: "table text-center" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.arrayDatos, function(datos) {
-              return _c("tr", { key: datos.id }, [
-                _c("td", { domProps: { textContent: _vm._s(datos.nombre) } }),
-                _vm._v(" "),
-                _c("td", { domProps: { textContent: _vm._s(datos.apellido) } }),
-                _vm._v(" "),
-                _c("td", { domProps: { textContent: _vm._s(datos.edad) } }),
-                _vm._v(" "),
-                _c("td", { domProps: { textContent: _vm._s(datos.genero) } }),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      on: {
-                        click: function($event) {
-                          return _vm.UpdateDatos(datos)
-                        }
-                      }
-                    },
-                    [_vm._v("Editar")]
-                  ),
+        _c(
+          "table",
+          { staticClass: "table text-center table-striped table-hover" },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.arrayPersona, function(persona) {
+                return _c("tr", { key: persona.id }, [
+                  _c("td", {
+                    domProps: { textContent: _vm._s(persona.documento) }
+                  }),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteDatos(datos)
+                  _c("td", {
+                    domProps: { textContent: _vm._s(persona.nombre) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(persona.apellido) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", { domProps: { textContent: _vm._s(persona.edad) } }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(persona.telefono) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(persona.genero) }
+                  }),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        on: {
+                          click: function($event) {
+                            return _vm.UpdatePersona(persona)
+                          }
                         }
-                      }
-                    },
-                    [_vm._v("Eliminar")]
-                  )
+                      },
+                      [_vm._v("Editar\n              ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            return _vm.deletePersona(persona)
+                          }
+                        }
+                      },
+                      [_vm._v("Eliminar\n              ")]
+                    )
+                  ])
                 ])
-              ])
-            }),
-            0
-          )
-        ])
+              }),
+              0
+            )
+          ]
+        )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("h2", [_vm._v("Lista de Personas")]),
+      _c("div", { staticClass: "col-md-6 col-xs-12" }, [
+        _c("h2", [_vm._v("Formulario Datos de Personas")]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Documento")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.documento,
+                expression: "documento"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "number", max: "10", min: "1" },
+            domProps: { value: _vm.documento },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.documento = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
           _c("label", [_vm._v("Nombre")]),
           _vm._v(" "),
           _c("input", {
@@ -38135,7 +38197,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "number" },
+            attrs: { type: "number", min: "1" },
             domProps: { value: _vm.edad },
             on: {
               input: function($event) {
@@ -38143,6 +38205,30 @@ var render = function() {
                   return
                 }
                 _vm.edad = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("Telefono")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.telefono,
+                expression: "telefono"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { max: "10", type: "number" },
+            domProps: { value: _vm.telefono },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.telefono = $event.target.value
               }
             }
           }),
@@ -38178,7 +38264,9 @@ var render = function() {
               }
             },
             [
-              _c("option", [_vm._v("Seleccione un Genero")]),
+              _c("option", { attrs: { selected: "" } }, [
+                _vm._v("Seleccione un Genero")
+              ]),
               _vm._v(" "),
               _c("option", [_vm._v("Masculino")]),
               _vm._v(" "),
@@ -38195,7 +38283,7 @@ var render = function() {
                   staticClass: "btn btn-success",
                   on: {
                     click: function($event) {
-                      return _vm.saveDatos()
+                      return _vm.savePersona()
                     }
                   }
                 },
@@ -38210,7 +38298,7 @@ var render = function() {
                   staticClass: "btn btn-warning",
                   on: {
                     click: function($event) {
-                      return _vm.updateDatos()
+                      return _vm.updatePersona()
                     }
                   }
                 },
@@ -38244,6 +38332,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Documento")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Apellido")]),
@@ -38251,6 +38341,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Edad")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Genero")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Telefono")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Opciones")])
       ])
@@ -50451,7 +50543,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
-Vue.component('persona-component', __webpack_require__(/*! ./components/Persona.vue */ "./resources/js/components/Persona.vue")["default"]);
+Vue.component('persona', __webpack_require__(/*! ./components/Persona.vue */ "./resources/js/components/Persona.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
