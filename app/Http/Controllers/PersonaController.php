@@ -55,9 +55,11 @@ class PersonaController extends Controller
      * @param  \App\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function show(Persona $persona)
+    public function show(Request $request)
     {
         //
+        $persona = Persona::findOrFail($request->id);
+        return $persona;
     }
 
     /**
@@ -100,7 +102,7 @@ class PersonaController extends Controller
      * @param  \App\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Persona $persona)
+    public function destroy(Request $request)
     {
         //
         $persona = Persona::destroy($request->id);

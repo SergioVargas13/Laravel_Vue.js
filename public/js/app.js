@@ -2128,16 +2128,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getPersona: function getPersona() {
-      var persona = this;
+      var datos = this;
       var url = '/persona';
       axios.get(url).then(function (response) {
-        persona.arrayPersona = response.data;
+        datos.arrayPersona = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
     },
     savePersona: function savePersona() {
-      var persona = this;
+      var datos = this;
       var url = '/persona/guardar';
       axios.post(url, {
         'documento': this.documento,
@@ -2147,14 +2147,14 @@ __webpack_require__.r(__webpack_exports__);
         'telefono': this.telefono,
         'genero': this.genero
       }).then(function (response) {
-        persona.getPersona();
-        persona.clear();
+        datos.getPersona();
+        datos.clear();
       })["catch"](function (error) {
         console.log(error);
       });
     },
     updatePersona: function updatePersona() {
-      var persona = this;
+      var datos = this;
       axios.put('/persona/actualizar', {
         'id': this.update,
         'documento': this.documento,
@@ -2164,34 +2164,34 @@ __webpack_require__.r(__webpack_exports__);
         'telefono': this.telefono,
         'genero': this.genero
       }).then(function (response) {
-        persona.getPersona();
-        persona.clear();
+        datos.getPersona();
+        datos.clear();
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    UpdatePersona: function UpdatePersona(data) {
+    loadUpdate: function loadUpdate(data) {
       this.update = data.id;
-      var persona = this;
+      var datos = this;
       var url = '/persona/buscar?id=' + this.update;
       axios.get(url).then(function (response) {
-        persona.documento = response.data.documento;
-        persona.nombre = response.data.nombre;
-        persona.apellido = response.data.apellido;
-        persona.edad = response.data.edad;
-        persona.telefono = response.data.telefono;
-        persona.genero = response.data.genero;
+        datos.documento = response.data.documento;
+        datos.nombre = response.data.nombre;
+        datos.apellido = response.data.apellido;
+        datos.edad = response.data.edad;
+        datos.telefono = response.data.telefono;
+        datos.genero = response.data.genero;
       })["catch"](function (error) {
         console.log(error);
       });
     },
     deletePersona: function deletePersona(data) {
-      var persona = this;
+      var datos = this;
       var persona_id = data.id;
 
       if (confirm('¿Seguro que deseas eliminar esta Persona?')) {
         axios["delete"]('/persona/borrar/' + persona_id).then(function (response) {
-          persona.getPersona();
+          datos.getPersona();
         })["catch"](function (error) {
           console.log(error);
         });
@@ -2204,6 +2204,7 @@ __webpack_require__.r(__webpack_exports__);
       this.edad = "";
       this.telefono = "";
       this.genero = "";
+      this.update = 0;
     }
   },
   mounted: function mounted() {
@@ -38037,7 +38038,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container container-task" }, [
+  return _c("div", { staticClass: "container" }, [
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6 col-xs-12" }, [
         _c("h2", [_vm._v("Listas de Datos de Personas")]),
@@ -38081,7 +38082,7 @@ var render = function() {
                         staticClass: "btn btn-primary",
                         on: {
                           click: function($event) {
-                            return _vm.UpdatePersona(persona)
+                            return _vm.loadUpdate(persona)
                           }
                         }
                       },

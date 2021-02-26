@@ -1,5 +1,5 @@
 <template>
-  <div class="container container-task">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-6 col-xs-12">
         <h2>Listas de Datos de Personas</h2>
@@ -24,7 +24,7 @@
               <td v-text="persona.telefono"></td>
               <td v-text="persona.genero"></td>
               <td>
-                <button class="btn btn-primary" @click="UpdatePersona(persona)">Editar
+                <button class="btn btn-primary" @click="loadUpdate(persona)">Editar
                 </button>
                 <button class="btn btn-danger" @click="deletePersona(persona)">Eliminar
                 </button>
@@ -79,17 +79,17 @@ export default {
         },
         methods:{
             getPersona(){
-                let persona =this;
+                let datos =this;
                 let url = '/persona' 
                 axios.get(url).then(function (response) {
-                    persona.arrayPersona = response.data;
+                    datos.arrayPersona = response.data;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
             },
             savePersona(){
-                let persona =this;
+                let datos =this;
                 let url = '/persona/guardar'
                 axios.post(url,{ 
                     'documento':this.documento,
@@ -99,8 +99,8 @@ export default {
                     'telefono':this.telefono,
                     'genero':this.genero,
                 }).then(function (response) {
-                    persona.getPersona();
-                    persona.clear();
+                    datos.getPersona();
+                    datos.clear();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -108,7 +108,7 @@ export default {
 
             },
             updatePersona(){
-                let persona = this;
+                let datos = this;
                 axios.put('/persona/actualizar',{
                     'id':this.update,
                     'documento':this.documento,
@@ -118,36 +118,36 @@ export default {
                     'telefono':this.telefono,
                     'genero':this.genero,
                 }).then(function (response) {
-                   persona.getPersona();
-                   persona.clear();
+                   datos.getPersona();
+                   datos.clear();
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
             },
-            UpdatePersona(data){ 
+            loadUpdate(data){ 
                 this.update = data.id
-                let persona =this;
+                let datos =this;
                 let url = '/persona/buscar?id='+this.update;
                 axios.get(url).then(function (response) {
-                    persona.documento=response.data.documento;
-                    persona.nombre= response.data.nombre;
-                    persona.apellido=response.data.apellido;
-                    persona.edad=response.data.edad;
-                    persona.telefono=response.data.telefono;
-                    persona.genero=response.data.genero; 
+                    datos.documento=response.data.documento;
+                    datos.nombre= response.data.nombre;
+                    datos.apellido=response.data.apellido;
+                    datos.edad=response.data.edad;
+                    datos.telefono=response.data.telefono;
+                    datos.genero=response.data.genero; 
                 })
                 .catch(function (error) {
                     console.log(error);
                 }); 
             },
             deletePersona(data){
-                let persona =this;
+                let datos =this;
                 let persona_id = data.id
                 if (confirm('¿Seguro que deseas eliminar esta Persona?')) {
                     axios.delete('/persona/borrar/'+persona_id
                     ).then(function (response) {
-                        persona.getPersona();
+                        datos.getPersona();
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -161,6 +161,7 @@ export default {
                 this.edad="";
                 this.telefono="";
                 this.genero="";
+                this.update = 0;
             }
         },
         mounted() {
